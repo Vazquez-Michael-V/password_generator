@@ -25,19 +25,28 @@ def get_categories(max_char):
     number of digits, and number of special characters."""
     categories = ['Enter number of lowercase letters. ', 'Enter number of uppercase letters. ', 'Enter number of digits. ', 'Enter number special characters. ']
     remaining_chars = max_char
-    arr = []
-    for c in categories:
-        c = input(f"{c}")
-        c = check_int(c)
-        # Check if there are enough characters remaining.
-        c = check_remaining_chars(remaining_chars, c)
-        remaining_chars -= c        
-        #print(max_char)
-        #print(remaining_chars)
-        arr.append(c)
-        if remaining_chars == 0:
-            print("All characters have been used.")
-            break
+    while remaining_chars != 0:
+        arr = []
+        for c in categories:
+            c = input(f"{c}")
+            c = check_int(c)
+            # Check if there are enough characters remaining.
+            c = check_remaining_chars(remaining_chars, c)
+            remaining_chars -= c        
+            #print(max_char)
+            #print(remaining_chars)
+            arr.append(c)
+            print(f"\tYou have {remaining_chars} remaining.")
+            if remaining_chars == 0:
+                print(f"All {max_char} characters have been used.")                  
+                break
+        #If password does not meet the required length entered by the user,
+        # re-start the process and ask the user to re-enter their specifications.     
+        if remaining_chars != 0:    
+            print(f"The sum of your entries is less than {max_char}.")
+            print("Please re-enter your password specifications.")
+            remaining_chars = max_char #Reset the character count.
+            continue
         #print(arr)
     return arr
     
